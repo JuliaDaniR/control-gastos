@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <title>Control de Gastos Mensuales</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="container">
+        <div class="img-container">
+          <img src="./assets/img/titulo.png" />
+        </div>
+        <div class="contenedor">
+          <div class="containerForm">
+            <div class="form-group">
+              <input
+                type="text"
+                id="nombreGasto"
+                placeholder="Nombre del gasto"
+              />
+              <input
+                type="text"
+                id="detalleGasto"
+                placeholder="Detalle del gasto"
+              />
+              <input
+                type="number"
+                id="valorGasto"
+                placeholder="Valor del gasto"
+                min="0"
+                step="0.01"
+              />
+              <div id="advertencia"></div>
+              <button id="botonFormulario" onclick="clickBoton();">
+                Agregar Gasto
+              </button>
+            </div>
+          </div>
+          <div>
+            <div class="containerLista" id="containerLista">
+              <div class="container-btn" id="containerBtnAcciones">
+                <button id="eliminar" onclick="eliminarSeleccionados();">
+                  <img
+                    src="/assets/img/trash-bin_11186844.gif"
+                    alt="Tacho Animado"
+                    class="tacho-animado"
+                  />
+                </button>
+                <button id="modificar" onclick="modificarSeleccionados();">
+                  <img
+                    src="/assets/img/tablet_11681448.gif"
+                    alt="Tacho Animado"
+                    class="tacho-animado"
+                  />
+                </button>
+              </div>
+              <ul id="listaDeGastos"></ul>
+            </div>
+            <div class="total">
+              Total Mensual: US$ <span id="totalGastos">0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="assets/js/script.js"></script>
+  </body>
+</html>
