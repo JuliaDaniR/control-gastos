@@ -1,6 +1,8 @@
 let listaNombresGastos = [];
 let listaValoresGastos = [];
 let listaDetalleGastos = [];
+let listaNombresIngresos = [];
+let listaValoresIngresos = [];
 
 function clickBoton() {
   const nombreGasto = document.getElementById("nombreGasto").value.trim();
@@ -64,6 +66,9 @@ function agregarGasto(nombreGasto, valorGasto, detalleGasto) {
   listaValoresGastos.push(valorGasto);
   listaDetalleGastos.push(detalleGasto);
   actualizarListaGastos();
+
+  const totalIngresos = listaValoresIngresos.reduce((acc, valor) => acc + valor, 0);
+  actualizarSaldo(totalIngresos);
 }
 
 function actualizarListaGastos() {
@@ -127,6 +132,9 @@ function eliminarSeleccionados() {
   listaDetalleGastos = listaDetalleGastos.filter((_, index) => !posiciones.includes(index.toString()));
 
   actualizarListaGastos();
+
+  const totalIngresos = listaValoresIngresos.reduce((acc, valor) => acc + valor, 0);
+  actualizarSaldo(totalIngresos);
 }
 
 function modificarSeleccionados() {
@@ -151,8 +159,10 @@ function modificarSeleccionados() {
       listaValoresGastos[posicion] = parseFloat(document.getElementById("valorGasto").value.trim());
       actualizarListaGastos();
 
-      // Restablecer el texto y el evento original del botón
       restablecerBotonFormulario();
+
+      const totalIngresos = listaValoresIngresos.reduce((acc, valor) => acc + valor, 0);
+      actualizarSaldo(totalIngresos);
     };
   } else if (posiciones.length > 1) {
     // Si hay más de un checkbox seleccionado, muestra una advertencia
@@ -171,6 +181,54 @@ function restablecerBotonFormulario() {
   botonFormulario.textContent = "Agregar Gasto";
   botonFormulario.onclick = clickBoton;
 }
+
+function agregarIngreso() {
+  const nombreIngreso = document.getElementById("nombreIngreso").value.trim();
+  const valorIngreso = parseFloat(document.getElementById("valorIngreso").value.trim());
+
+  if (nombreIngreso !== "" && valorIngreso > 0 && !isNaN(valorIngreso)) {
+    listaNombresIngresos.push(nombreIngreso);
+    listaValoresIngresos.push(valorIngreso);
+    actualizarIngresos();
+    limpiarIngreso();
+  } else {
+    mostrarAdvertencia("Debes completar todos los campos del ingreso", document.getElementById("advertencia"));
+  }
+}
+
+function actualizarIngresos() {
+  const totalIngresos = listaValoresIngresos.reduce((acc, valor) => acc + valor, 0);
+  document.getElementById("totalIngresos").innerHTML = totalIngresos.toFixed(2);
+  actualizarSaldo(totalIngresos);
+}
+
+function actualizarSaldo(totalIngresos) {
+  const totalGastos = listaValoresGastos.reduce((acc, valor) => acc + valor, 0);
+  const saldo = totalIngresos - totalGastos;
+  document.getElementById("saldo").innerHTML = saldo.toFixed(2);
+
+  const saldoElement = document.getElementById("saldo");
+  if (saldo <= 0 || saldo <= totalIngresos * 0.10) {
+    saldoElement.style.color = "red"; // Color rojo si el saldo es negativo
+  } else if (saldo <= totalIngresos * 0.50) {
+    saldoElement.style.color = "yellow"; // Color amarillo si el saldo es menor al 10%
+  } else {
+    saldoElement.style.color = "darkgreen"; // Color negro si está en el rango seguro
+  }
+}
+
+function limpiarIngreso() {
+  document.getElementById("nombreIngreso").value = "";
+  document.getElementById("valorIngreso").value = "";
+}
+
+function limpiarTodo() {
+  document.getElementById("totalIngresos").innerHTML = "0.00";
+  document.getElementById("saldo").innerHTML = "0.00";
+  document.getElementById("saldo").style.color = "white";
+  limpiarCampos(); 
+}
+
 
 // Agregar event listener al botón "Eliminar Seleccionados"
 document.getElementById("botonEliminarSeleccionados").addEventListener("click", eliminarSeleccionados);

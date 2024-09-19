@@ -23,7 +23,7 @@ input[type="number"] {
   box-shadow: 2px 4px 6px black;
 }
 
-#botonFormulario {
+#botonFormulario, #botonIngreso {
   padding: 10px 40px;
   width: fit-content;
   background-color: #0c4053;
@@ -35,9 +35,10 @@ input[type="number"] {
   cursor: pointer;
   transition: background-color 0.3s;
   box-shadow: 2px 4px 6px black;
+  margin-bottom: 2rem;
 }
 
-#botonFormulario:hover {
+#botonFormulario:hover, #botonIngreso:hover {
   background-color: #9fae4c;
   color: black;
 }
@@ -73,6 +74,19 @@ input[type="number"] {
   border-radius: 20px;
   gap: 1rem;
   box-shadow: 4px 6px 8px black;
+}
+#limpiarTodo{
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: red;
+  border: 2px solid darkred;
+  border-radius: 50%;
+  padding: .2rem;
+  transition: background 1s ease-in-out;
+}
+
+#limpiarTodo:hover{
+  background: #18d3e8;
 }
 
 #eliminar .tacho-animado,
@@ -235,6 +249,7 @@ padding: 1rem;
   font-size: 24px;
   text-align: center;
   color: #fff;
+  background: rgba(245, 222, 179, 0.524);
 }
 
 .checkbox-gasto {

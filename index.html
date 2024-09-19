@@ -21,6 +21,23 @@
             <div class="form-group">
               <input
                 type="text"
+                id="nombreIngreso"
+                placeholder="Nombre del ingreso(Sueldo)"
+              />
+              <input
+                type="number"
+                id="valorIngreso"
+                placeholder="Valor del ingreso"
+                min="0"
+                step="0.01"
+              />
+              <button id="botonIngreso" onclick="agregarIngreso();">
+                Agregar Ingreso
+              </button>
+            </div>            
+            <div class="form-group">
+              <input
+                type="text"
                 id="nombreGasto"
                 placeholder="Nombre del gasto"
               />
@@ -62,8 +79,17 @@
               </div>
               <ul id="listaDeGastos"></ul>
             </div>
+            <div class="total" style="display: flex; justify-content: space-between; padding: .3rem;">
+              Total Ingresos: US$ <span id="totalIngresos">0.00</span>
+              <button id="limpiarTodo" onclick="limpiarTodo()">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
             <div class="total">
-              Total Mensual: US$ <span id="totalGastos">0.00</span>
+              Saldo: US$ <span id="saldo">0.00</span>
+            </div>
+            <div class="total">
+              Total Gastos Mensual: US$ <span id="totalGastos">0.00</span>
             </div>
           </div>
         </div>
