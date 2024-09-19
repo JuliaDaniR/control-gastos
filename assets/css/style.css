@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background: url("../assets/img/fondo-control.jpeg"),
+  background: url("./assets/img/fondo-control.jpeg"),
     linear-gradient(#1354a5 0%, #041832 33.33%, #041832 66.67%, #01080e 100%);
   background-size: cover;
   background-repeat: no-repeat;
